@@ -15,11 +15,23 @@ class BazaModel(Model):
 
 
 class Uczen(BazaModel):
-    pass
+    imie = CharField(null=False)
+    nazwisko = CharField(null=False)
+    plec = CharField('Płeć')
+    klasa = ForeignKeyField(Klasa, related_name='uczniowie')
+
+
 
 
 class Klasa(BazaModel):
-    pass
+    klasa = CharField(null=False)
+    rok_naboru = CharField(null=False)
+    rok_matury = CharField(null=False)
+    
+    
+def main(args):
+    baza.connect()
+    baza.create_tables([Klasa, Uczen])
 
 
 if __name__ == '__main__':
