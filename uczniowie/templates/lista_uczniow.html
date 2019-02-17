@@ -1,0 +1,20 @@
+{%extends "szablon.html"%}
+{%block tytul%}Lista uczniów{%endblock%}
+{%block h1%}A oto oni{%endblock%}
+{%block tresc%}
+<h2>Uczniowie:</h2>
+<ol>
+    {%for k in query%}
+
+        <li class="elemdel">
+          <p>Imie: {{ k.imie }}</p>
+          <p>Nazwisko: {{k.nazwisko}}</p>
+          <p>Płeć: {{k.plec}}</p>
+          <p>Klasa: {{k.klasa}}</p>
+          <a href="{{url_for('uczen_edytuj', kid=k.id)}}" class="btn btn-sm btn-primary">Edytuj</a>
+        </li>
+
+
+    {%endfor%}
+</ol>
+{%endblock%}

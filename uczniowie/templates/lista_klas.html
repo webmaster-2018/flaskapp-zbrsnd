@@ -1,0 +1,18 @@
+{% extends "szablon.html" %}
+{% block tytul %}KLASA++ - lista klas{% endblock %}
+{% block h1 %}KLASA++ - lista klas{% endblock %}
+{% block tresc %}
+  <h2>Lista Klas</h2>
+  <ol>
+    {% for k in query %}
+        <li class="elemdel">
+          <p>Klasa: {{ k.klasa }}</p>
+          <p>Rok matury: {{k.rok_matury}}</p>
+          <p>Rok naboru: {{k.rok_naboru}}</p>
+          <a href="{{url_for('klasa_usun', kid=k.id)}}" class="btn btn-sm btn-danger">Usun</a>
+          <a href="{{url_for('klasa_edytuj', kid=k.id)}}" class="btn btn-sm btn-primary">Edytuj</a>
+        </li>
+    {% endfor %}
+  </ol>
+ 
+{% endblock %}
