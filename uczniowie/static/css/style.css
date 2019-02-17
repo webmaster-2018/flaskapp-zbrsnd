@@ -1,0 +1,20 @@
+
+#komunikaty {
+    width: 80%;
+    margin: 2em;
+    border-radius: 5px;
+    border: 2px solid green;
+    background-color: lightgrey;
+}
+span.blad {color:red;}
+span.sukces {color:green;}
+span.kom {color:blue;}
+
+ol.alfabet { list-style-type: lower-alpha;}
+.bg-nawigacja {background-color: #414141;}
+.bg-nawigacja1 {background-color:#0600FF;}
+.bg-nawigacja2 {background-color:#000000;}
+
+section#about { padding: 50px 0;}
+li.elemdel { padding: 10px 0;}
+header { padding: 106px 0 50px 0; }
