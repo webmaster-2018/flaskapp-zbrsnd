@@ -13,21 +13,16 @@ class BazaModel(Model):
     class Meta:
         database = baza
 
+class Klasa(BazaModel):
+    klasa = CharField(null=False)
+    rok_naboru = CharField(null=False)
+    rok_matury = CharField(null=False)
 
 class Uczen(BazaModel):
     imie = CharField(null=False)
     nazwisko = CharField(null=False)
     plec = CharField('Płeć')
-    klasa = ForeignKeyField(Klasa, related_name='uczniowie')
-
-
-
-
-class Klasa(BazaModel):
-    klasa = CharField(null=False)
-    rok_naboru = CharField(null=False)
-    rok_matury = CharField(null=False)
-    
+    klasa = ForeignKeyField(Klasa, related_name='uczniowie')    
     
 def main(args):
     baza.connect()

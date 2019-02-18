@@ -13,18 +13,18 @@ def index():
     """Strona główna"""
     return render_template('index.html')
 
-@app.route('/lista_ucz')
+@app.route('/lista_uczniow')
 def lista_ucz():
     uczniowie = Uczen.select()
     return render_template('lista_uczniow.html', query=uczniowie)
     
-@app.route('/lista_kl')
+@app.route('/lista_klas')
 def lista_kl():
     klasy = Klasa.select()
     return render_template('lista_klas.html', query=klasy)
     
     
-@app.route('/dodaj_kl', methods=['GET', 'POST'])
+@app.route('/dodaj_klasa', methods=['GET', 'POST'])
 def dodaj_kl():
     form = DodajForm()
     form.klasa.choices = [(k.id, k.klasa) for k in Klasa.select()]
