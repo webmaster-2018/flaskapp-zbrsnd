@@ -57,3 +57,15 @@ def dodaj_ucz():
         flash_errors(form)
 
     return render_template('dodaj_ucznia.html', form=form)
+
+def get_or_404(obiekt, id):
+    try:
+        o = obiekt.get_by_id(id)
+        return o
+    except Klasa.DoesNotExist:
+        abort(404)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
