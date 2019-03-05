@@ -69,3 +69,53 @@ def get_or_404(obiekt, id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@app.route('/klasa_usun/<int:kid>', methods=['GET', 'POST'])
+def klasa_usun(kid):
+    """Usuwanie klasy o podanym id"""
+    k = get_or_404(Klasa, kid)
+    if request.method == 'POST':
+        flash('Usunięto klase {}'.format(k.klasa), 'sukces')
+        k.delete_instance()
+        return redirect(url_for('index'))
+    return render_template('klasa_usun.html', klasa=k)
+
+
+@app.route('/klasa_edytuj/<int:kid>', methods=['GET', 'POST'])
+def klasa_edytuj(kid):
+    """Edycja pytan i odpowiedzi"""
+    k = get_or_404(Klasa, kid)
+
+    form = DodajForm(obj=k)
+
+    if form.validate_on_submit():
+        k.klasa = form.klasa.data
+        k.rok_matury = form.rok_matury.data
+        k.rok_naboru = form.rok_naboru.data
+        k.save()
+        flash("Zaktualizowano klasę: {}".format(form.klasa.data))
+        redirect(url_for('lista_klas'))
+    else:
+        flash_errors(form)
+
+    return render_template('klasa_edytuj.html', form=form)
+
+@app.route('/uczen_edytuj/<int:kid>', methods=['GET', 'POST'])
+def uczen_edytuj(kid):
+  
+    k = get_or_404(Uczen, kid)
+
+    form = DodajUczForm(obj=k)
+
+    if form.validate_on_submit():
+        k.imie = form.imie.data
+        k.nazwisko = form.nazwisko.data
+        k.plec = form.plec.data
+        k.klasa = form.klasa.data
+        k.save()
+        flash("Zaktualizowano ucznia: {}".format(form.imie.data))
+        redirect(url_for('lista_uczniow'))
+    else:
+        flash_errors(form)
+
+    return render_template('uczen_edytuj.html', form=form)
